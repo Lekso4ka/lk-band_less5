@@ -45,8 +45,15 @@ function setLike(el, id, like) {
         },
         body: JSON.stringify({favorite: like})
     })
-    .then(res => res.blob())
+    .then(res => res.json())
     .then(data => {
         console.log(data);
+        pets = pets.map(p => {
+            if (p.id === id) {
+                p.favorite = like;
+            }
+            return p;
+        })
+        localStorage.setItem("band-cats", JSON.stringify(pets));
     })
 }

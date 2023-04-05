@@ -13,3 +13,19 @@ let path = `https://cats.petiteweb.dev/api/single/${name}`;
     JSON.stringify(obj) => преобразует объект в строку
     JSON.parse(str) => преобразует строку в объект
 */
+
+// Хранит информацию как строку
+let pets = localStorage.getItem("band-cats");
+// let pets = localStorage.getItem("unic");
+if (pets) {
+    try {
+        pets = JSON.parse(pets);
+        for (let pet of pets) {
+            createCard(pet, block);
+        }
+    } catch(err) {
+        console.warn(err.message);
+        pets = null;
+    }
+}
+console.log("pets", pets);
