@@ -108,7 +108,7 @@ form {
     margin-top: 16px;
     gap: 8px;
 }
-input {
+input:note([type="checkbox"]) {
     width: 100%;
     box-sizing: border-box;
     height: 30px;

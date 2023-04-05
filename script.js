@@ -23,6 +23,10 @@ mdBox.addEventListener("click", e => {
         mdBox.classList.remove("active");
     }
 });
+// addForm.elements.favorite.addEventListener("change", e => {
+//     console.log(e.currentTarget.value);
+//     console.log(e.currentTarget.checked);
+// })
 addForm.addEventListener("submit", e => {
     e.stopPropagation(); // Всплытие пузырька / bubble effect
     e.preventDefault(); // Остановить действие по умолчанию - запрограммировано браузером
@@ -36,10 +40,35 @@ addForm.addEventListener("submit", e => {
     for (let i = 0; i < addForm.elements.length; i++) {
         const el = addForm.elements[i];
         if (el.name) {
-            body[el.name] = el.value;
+            if (el.name === "favorite") {
+                body[el.name] = el.checked;
+            } else {
+                body[el.name] = el.value;
+            }
         }
     }
-    console.log(body);
+    // console.log(body);
+    fetch(path + "/ids")
+        .then(res => res.json())
+        .then(ids => {
+            console.log(ids);
+            body.id = ids[ids.length - 1] + 1;
+            console.log(body);
+            return fetch(path + "/add", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+            })
+        })    
+        .then(res => {
+            console.log(res.status);
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
 })
 
 
