@@ -27,6 +27,11 @@ mdBox.addEventListener("click", e => {
 //     console.log(e.currentTarget.value);
 //     console.log(e.currentTarget.checked);
 // })
+
+addForm.elements.image.addEventListener("change", e => {
+    prevTag.style.backgroundImage = `url(${e.currentTarget.value})`;
+})
+
 addForm.addEventListener("submit", e => {
     e.stopPropagation(); // Всплытие пузырька / bubble effect
     e.preventDefault(); // Остановить действие по умолчанию - запрограммировано браузером
@@ -63,12 +68,18 @@ addForm.addEventListener("submit", e => {
             })
         })    
         .then(res => {
-            console.log(res.status);
-            return res.json();
+            if (res.status === 200) {
+                addForm.reset();
+                prevTag.style = null;
+                mdBox.classList.remove("active");
+                createCard(body, block);
+            }
+            // console.log(res.status);
+            // return res.json();
         })
-        .then(data => {
-            console.log(data);
-        })
+        // .then(data => {
+        //     console.log(data);
+        // })
 })
 
 
