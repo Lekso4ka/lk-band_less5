@@ -3,7 +3,7 @@ const addBtn = document.querySelector(".add");
 const mdBox = document.querySelector(".modal-block");
 const mdClose = mdBox.querySelector(".modal-close");
 // const mdClose = mdBox.firstElementChild;
-
+const addForm = document.forms.add;
 
 let name = "lk_band";
 let path = `https://cats.petiteweb.dev/api/single/${name}`;
